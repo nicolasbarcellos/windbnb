@@ -1,16 +1,17 @@
 import { useLocals } from "../../hooks/useLocals";
 import { Container } from "./style";
 import { AiFillStar } from "react-icons/ai";
-import { useEffect } from "react";
 
 export function Rooms(): JSX.Element {
-  const { locals, newLocals } = useLocals();
+  const { locals, localsFiltered, error } = useLocals();
   
-  const data = newLocals.length === 0 ? locals : newLocals;
+  const data = localsFiltered.length === 0 ? locals : localsFiltered;
+
+  console.log(error);
 
   return (
     <Container>
-      {data.map((local) => {
+      {!error && data.map((local) => {
         return (
           <li key={local.id}>
             <img src={local.photo} alt={local.title} />

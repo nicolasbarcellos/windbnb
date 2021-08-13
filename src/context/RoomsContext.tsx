@@ -20,9 +20,17 @@ interface LocalsData {
 
 export interface LocalsProviderData {
   locals: LocalsData[];
-  newLocals: LocalsData[];
-  searchLocals: (locals: string, guests: number) => void;
+  localsFiltered: LocalsData[];
+  searchLocals: (e: React.FormEvent) => void;
+  cityMatch: (city: string) => void;
+  cityToQuery: string;
+  guestSubtract: () => void;
+  guestSum: () => void;
+  guestsToQuery: number;
+  error: ReactNode;
 }
+
+
 
 export const LocalsContext = createContext<LocalsProviderData>(
   {} as LocalsProviderData
@@ -32,7 +40,10 @@ export const LocalsProvider = ({
   children,
 }: LocalsProviderProps): JSX.Element => {
   const [locals, setLocals] = useState<LocalsData[]>([]);
-  const [newLocals, setNewLocals] = useState<LocalsData[]>([]);
+  const [localsFiltered, setLocalsFiltered] = useState<LocalsData[]>([]);
+  const [cityToQuery, setCityToQuery] = useState<string>("");
+  const [guestsToQuery, setGuestsToQuery] = useState<number>(0);
+  const [error, setError] = useState('' as any);
 
   useEffect(() => {
     async function loadLocals() {
@@ -49,21 +60,60 @@ export const LocalsProvider = ({
     loadLocals();
   }, []);
 
-  function searchLocals(localCity: string, allGuests = 0) {
-    const allLocals = [...locals];
-    const localsExists = allLocals.filter((local) => local.city === localCity);
-    const newLocals = localsExists.filter(
-      (local) => local.maxGuests >= allGuests
-    );
-    setNewLocals(localsExists);
+  function cityMatch(city: string) {
+    setCityToQuery(city);
+  }
 
-    if (allGuests > 0) {
-      setNewLocals(newLocals);
+  function guestSubtract() {
+    if (guestsToQuery === 0) return;
+    setGuestsToQuery(guestsToQuery - 1);
+  }
+
+  function guestSum() {
+    setGuestsToQuery(guestsToQuery + 1);
+  }
+
+
+
+  function searchLocals(e: React.FormEvent) {
+    e.preventDefault();
+    const matchCityArray = locals.filter((local) => local.city === cityToQuery);
+
+    if (matchCityArray.length === 0) return;
+
+    if (guestsToQuery > 0) {
+      const matchGuestsArray = matchCityArray.filter(
+        (local) => guestsToQuery <= local.maxGuests
+      ) 
+        if (matchGuestsArray.length === 0) {
+          setError(true);
+          console.log('object')
+        } else {
+          setError(false);
+        }
+
+      setLocalsFiltered(matchGuestsArray);
+    } 
+     else {
+      setLocalsFiltered(matchCityArray);
     }
+    
   }
 
   return (
-    <LocalsContext.Provider value={{ locals, searchLocals, newLocals }}>
+    <LocalsContext.Provider
+      value={{
+        locals,
+        searchLocals,
+        cityToQuery,
+        guestSubtract,
+        guestSum,
+        cityMatch,
+        localsFiltered,
+        guestsToQuery,
+        error
+      }}
+    >
       {children}
     </LocalsContext.Provider>
   );

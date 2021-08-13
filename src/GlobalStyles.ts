@@ -23,8 +23,8 @@ export const GlobalStyle = createGlobalStyle`
 
     body {
       position: relative;
-      z-index: 1;
- 
+      overflow-x: hidden;
+      min-height: 100vh;
     }
 
     html {
