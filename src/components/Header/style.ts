@@ -2,13 +2,22 @@ import styled from "styled-components";
 
 export const Container = styled.header`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   padding: 2rem 0;
 
+  @media (max-width: 390px) {
+    gap: 1.5rem;
+  }
+
   button {
     display: flex;
     align-items: center;
+
+    @media (max-width: 390px) {
+      margin: 0 auto;
+    }
 
     font-family: "Mulish", sans-serif;
     font-size: 1.4rem;
@@ -53,5 +62,3 @@ export const Container = styled.header`
     z-index: 4;
   }
 `;
-
-// export const OverlayContainer = styled.div``;

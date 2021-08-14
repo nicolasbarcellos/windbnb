@@ -6,11 +6,34 @@ export const Container = styled.ul`
   column-gap: 4rem;
   row-gap: 5rem;
 
-  img {
-    width: 100%;
-    height: 269px;
-    object-fit: cover;
+  @media (max-width: 830px) {
+    grid-template-columns: 1fr;
+  }
+
+  li {
+
+    @media (max-width: 830px) {
+      grid-template-columns: 1fr;
+      grid-column: 1 / -1;
+    }
+  }
+
+  .imgWrapper {
+    overflow: hidden;
     border-radius: 2.4rem;
+
+    img {
+      height: 269px;
+      object-fit: cover;
+   
+      width: 100%;
+      transform: scale(1);
+      transition: transform 0.5s;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
   }
 
   div {
@@ -26,7 +49,6 @@ export const Container = styled.ul`
     text-transform: uppercase;
 
     padding: 0.5rem 0.7rem;
- 
 
     border-radius: 1.2rem;
     border: 1px solid currentColor;
@@ -35,8 +57,6 @@ export const Container = styled.ul`
 
   .local-type {
     font-weight: 500;
-
-
 
     color: var(--gray-light);
   }

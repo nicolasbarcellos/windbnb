@@ -29,6 +29,10 @@ export const GlobalStyle = createGlobalStyle`
 
     html {
       font-size: 62.5%;
+
+      @media(max-width: 350px) {
+        font-size: 55%;
+      }
     }
 
     img {
@@ -60,6 +64,6 @@ export const GlobalStyle = createGlobalStyle`
 export const Container = styled.div`
   max-width: 140rem;
   margin: 0rem auto;
-  padding: 0 6%;
+  padding: 0 4%;
   overflow: hidden;
 `;

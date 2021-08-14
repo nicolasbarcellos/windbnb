@@ -24,13 +24,12 @@ export interface LocalsProviderData {
   searchLocals: (e: React.FormEvent) => void;
   cityMatch: (city: string) => void;
   cityToQuery: string;
-  guestSubtract: () => void;
-  guestSum: () => void;
   guestsToQuery: number;
-  error: ReactNode;
+  errorLocation: boolean;
+  errorGuest: boolean;
+  totalGuests: (guests: number) => void;
+  searchSucess: boolean;
 }
-
-
 
 export const LocalsContext = createContext<LocalsProviderData>(
   {} as LocalsProviderData
@@ -43,7 +42,9 @@ export const LocalsProvider = ({
   const [localsFiltered, setLocalsFiltered] = useState<LocalsData[]>([]);
   const [cityToQuery, setCityToQuery] = useState<string>("");
   const [guestsToQuery, setGuestsToQuery] = useState<number>(0);
-  const [error, setError] = useState('' as any);
+  const [errorLocation, setErrorLocation] = useState(false);
+  const [errorGuest, setErrorGuest] = useState(false);
+  const [searchSucess, setSearchSucess] = useState(false);
 
   useEffect(() => {
     async function loadLocals() {
@@ -64,41 +65,39 @@ export const LocalsProvider = ({
     setCityToQuery(city);
   }
 
-  function guestSubtract() {
-    if (guestsToQuery === 0) return;
-    setGuestsToQuery(guestsToQuery - 1);
+  function totalGuests(guests: number) {
+    setGuestsToQuery(guests);
   }
-
-  function guestSum() {
-    setGuestsToQuery(guestsToQuery + 1);
-  }
-
-
 
   function searchLocals(e: React.FormEvent) {
     e.preventDefault();
-    const matchCityArray = locals.filter((local) => local.city === cityToQuery);
-
-    if (matchCityArray.length === 0) return;
-
-    if (guestsToQuery > 0) {
-      const matchGuestsArray = matchCityArray.filter(
-        (local) => guestsToQuery <= local.maxGuests
-      ) 
-        if (matchGuestsArray.length === 0) {
-          setError(true);
-          console.log('object')
-        } else {
-          setError(false);
-        }
-
-      setLocalsFiltered(matchGuestsArray);
-    } 
-     else {
-      setLocalsFiltered(matchCityArray);
+    const matchCityArray = locals
+      .filter((local) => local.city === cityToQuery)
+      .filter((local) => guestsToQuery <= local.maxGuests);
+    if (!cityToQuery && !guestsToQuery) {
+      setErrorLocation(true);
+      setErrorGuest(true);
+      return;
     }
-    
+
+    if (!cityToQuery) {
+      setErrorLocation(true);
+      return;
+    } else {
+      setErrorLocation(false);
+    }
+
+    if (!guestsToQuery) {
+      setErrorGuest(true);
+      return;
+    } else {
+      setErrorGuest(false);
+    }
+
+    setLocalsFiltered(matchCityArray);
+    setSearchSucess(true);
   }
+
 
   return (
     <LocalsContext.Provider
@@ -106,12 +105,13 @@ export const LocalsProvider = ({
         locals,
         searchLocals,
         cityToQuery,
-        guestSubtract,
-        guestSum,
         cityMatch,
         localsFiltered,
         guestsToQuery,
-        error
+        errorLocation,
+        errorGuest,
+        totalGuests,
+        searchSucess
       }}
     >
       {children}
