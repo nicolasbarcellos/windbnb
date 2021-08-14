@@ -1,8 +1,10 @@
 <div align="center">
   <img src=".github/logo.png" alt="Windbnb logo">
+  <a src=https://windbnb-dev.vercel.app>DEMO</a>
 </div>
 
-## Podcastr
+
+## Windbnb
 
 
 <h4 align="center">
