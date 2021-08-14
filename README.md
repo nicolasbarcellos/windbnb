@@ -5,7 +5,7 @@
 
 ## Windbnb
 
--[Demo:](https://windbnb-dev.vercel.app)
+[DEMO:](https://windbnb-dev.vercel.app)
 
 
 <h4 align="center">
