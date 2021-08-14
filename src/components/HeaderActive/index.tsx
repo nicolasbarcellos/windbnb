@@ -99,7 +99,7 @@ export function HeaderActive({ isOpen, onSearch }: HeaderActiveProps) {
       >
         <header>
           <h2>Edit your search</h2>
-          <AiOutlineClose onClick={handleClose} size={18} color={"#000"} />
+          <AiOutlineClose onClick={handleClose} size={24} color={"#000"} />
         </header>
         <form onSubmit={handleSearch}>
           <div className="locationWrapper">
@@ -181,7 +181,7 @@ export function HeaderActive({ isOpen, onSearch }: HeaderActiveProps) {
               </div>
             </ContainerGuest>
           )}
-          <button>
+          <button className='btnSearchMobile'>
             <AiOutlineSearch size={24} color="#fff" />
             Search
           </button>

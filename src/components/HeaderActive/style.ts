@@ -129,7 +129,6 @@ export const Container = styled.div`
 
 export const ContainerGuest = styled.div`
   padding: 2rem 0;
-  
 
   label {
     font-size: 1.4rem;
@@ -154,7 +153,6 @@ export const ContainerGuest = styled.div`
     align-items: center;
 
     button {
- 
       border: 0;
       background: transparent;
       cursor: pointer;
@@ -188,9 +186,6 @@ export const ContainerGuest = styled.div`
     }
 
     .inputWrapper {
-      
-      
-
       flex: 0;
 
       input[type="text"],
@@ -237,15 +232,29 @@ export const MenuMobile = styled.div`
 
   transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
 
+  .inputGuestWrapper {
+
+
+      input {
+        display: block;
+        text-align: center;
+        color: var(--gray);
+        font-size: 1.4rem;
+        padding: 0;
+        width: 4rem;
+      }
+    }
+
+
   header {
-    padding: 1rem 3% 0;
+    padding: 1rem 6% 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
 
     h2 {
       color: var(--gray);
-      font: 700 1.2rem Mulish, sans-serif;
+      font: 700 1.5rem Mulish, sans-serif;
     }
   }
 
@@ -263,6 +272,7 @@ export const MenuMobile = styled.div`
 
   form {
     display: flex;
+    position: relative;
     gap: 1rem;
     max-width: 120rem;
     margin: 0 auto;
@@ -318,8 +328,9 @@ export const MenuMobile = styled.div`
       }
     }
 
-    button {
+    .btnSearchMobile {
       display: flex;
+
       min-height: 5rem;
       align-items: center;
       gap: 0.5rem;
@@ -336,8 +347,12 @@ export const MenuMobile = styled.div`
 
       @media (max-width: 500px) {
         justify-content: center;
-        /* width: 15rem; */
-        margin: 0 auto;
+        position: absolute;
+        left: 50%;
+        right: 50%;
+        transform: translate(-50%, -50%);
+        bottom: 1rem;
+        margin: 0rem auto;
       }
 
       &:hover {
