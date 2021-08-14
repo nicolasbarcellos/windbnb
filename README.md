@@ -1,10 +1,11 @@
 <div align="center">
   <img src=".github/logo.png" alt="Windbnb logo">
-  <a src=https://windbnb-dev.vercel.app>DEMO</a>
 </div>
 
 
 ## Windbnb
+
+-[Demo:](https://windbnb-dev.vercel.app)
 
 
 <h4 align="center">
