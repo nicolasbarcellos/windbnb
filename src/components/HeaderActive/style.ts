@@ -188,18 +188,13 @@ export const ContainerGuest = styled.div`
     .inputWrapper {
       flex: 0;
 
-      input[type="text"],
-      input[type="password"],
-      input[type="number"] {
-        text-align: center;
-        display: block;
-        margin: 0 auto;
-        outline: none;
-      }
+  
 
       input {
         display: block;
-        margin: 0 auto;
+        text-align: center;
+        background: transparent !important;
+        box-shadow: none !important;
         color: var(--gray);
         font-size: 1.4rem;
         padding: 0;
@@ -221,7 +216,7 @@ export const MenuMobile = styled.div`
 
   @media (max-width: 500px) {
     display: block;
-    height: 80vh;
+    height: 70vh;
   }
 
   transform: translateY(-100%);
@@ -239,6 +234,8 @@ export const MenuMobile = styled.div`
         display: block;
         text-align: center;
         color: var(--gray);
+        background: transparent;
+        box-shadow: none !important;
         font-size: 1.4rem;
         padding: 0;
         width: 4rem;
@@ -321,7 +318,7 @@ export const MenuMobile = styled.div`
         font-family: "Mulish", sans-serif;
         color: var(--gray);
         text-transform: uppercase;
-
+        background: transparent !important;
         position: absolute;
         left: 2rem;
         top: 0.8rem;
